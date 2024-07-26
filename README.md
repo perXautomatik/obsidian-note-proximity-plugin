@@ -1,37 +1,42 @@
-# Obsidian Lookalike Plugin
+**Overview**
 
-[![GitHub Release](https://img.shields.io/github/v/release/jlweston/obsidian-note-proximity-plugin?sort=semver)](https://github.com/jlweston/obsidian-note-proximity-plugin/releases) [![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22note-promixity%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)](https://obsidian.md/plugins?id=note-promixity) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/license/MIT) [!["Buy Me A Coffee"](https://img.shields.io/badge/-buy_me_a%C2%A0coffee-gray?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/jamieweston)
+This fork of the Lookalike Obsidian plugin aims to address performance issues encountered when processing large vaults. By offloading computationally intensive tasks to a PowerShell script, we aim to significantly improve the plugin's responsiveness and efficiency.
 
-This is a plugin for Obsidian that allows you to identify other notes which may be similar to the current note. It does this by analysing word frequencies across all notes in the vault and comparing them to the current note.
+**Original Plugin ([Original repository](https://github.com/jlweston/obsidian-note-proximity-plugin))**
 
-## Installation
+The original Lookalike plugin, available on the Obsidian plugin store ([Link to plugin page](https://obsidian.md/plugins?id=note-promixity)), identifies other notes similar to the current note. It analyzes word frequencies across all notes in the vault and compares them to the current note.
 
-### From within Obsidian
+**Fork Objectives**
 
-Click [here](https://obsidian.md/plugins?id=note-promixity) to install the plugin from within Obsidian.
+- Reduce the amount of JavaScript code in the plugin.
+- Offload the majority of the plugin's logic to a PowerShell script.
+- Improve the plugin's performance, especially when handling large vaults.
+- Maintain the core functionality of the original plugin.
 
-### From GitHub
+**Development Process**
 
-1. Find the latest release from the [releases page](https://github.com/jlweston/obsidian-note-proximity-plugin/releases).
-2. Download `main.js`, `styles.css`, and `manifest.json`.
-3. Create a folder in your Obsidian vault's plugins directory called `note-promixity`.
-4. Copy the downloaded files into the `note-promixity` folder.
-5. Reload Obsidian.
-6. Under Settings -> Community plugins, enable the plugin.
+To achieve these objectives, the following steps were taken:
 
-## Usage
+1. **Identify performance bottlenecks:** The TfIdf calculations were identified as the primary performance bottleneck.
+2. **Create a PowerShell script:** A PowerShell script named `TfIdfProcessor.ps1` was created to handle the computationally intensive tasks, including text processing, statistical calculations, and vector operations.
+3. **Modify JavaScript code:** The JavaScript code was reduced to primarily handle Obsidian interactions and communication with the PowerShell script.
+4. **Optimize data transfer:** Efficient data structures were implemented for passing data between JavaScript and PowerShell.
 
-Once the plugin is enabled, there will be a new view in the right-hand pane called "Similar notes". Notes that are similar to the current note will be displayed here, with scores indicating how similar they are (higher scores indicate that the notes share potentially-relevant terms). Clicking on a note in this view will open it in the current editor.
+**Expected Improvements**
 
-If you've closed the sidebar tab and want to re-open it, you can use the "Open Lookalike sidebar" command from the Command Palette (Cmd/Ctrl+P).
+By delegating the heavy computational load to PowerShell, we anticipate a significant performance improvement, especially when processing large vaults. The reduced JavaScript codebase should also enhance maintainability and readability.
 
-## Feature roadmap
+**Usage**
 
-Allow configurations options for the plugin, such as:
+The usage instructions remain the same as the original plugin:
 
--   [ ] configure a minimum similarity threshold
--   [ ] configure the maximum number of similar notes to display
--   [ ] allow for the exclusion of certain notes/folders from the analysis
--   [ ] allow for the exclusion of certain words from the analysis
--   [ ] allow for excluding frontmatter and/or code blocks from the analysis
--   [ ] selection of alternative algorithms for calculating similarity
+- **From within Obsidian:** Install the plugin from the Obsidian plugin store ([Link to plugin page](https://obsidian.md/plugins?id=note-promixity)).
+- **From GitHub:** Download and install the plugin manually following the instructions in the original README.
+
+**License**
+
+This project is licensed under the MIT License ([Link to MIT License](https://opensource.org/license/MIT)).
+
+**Support the Original Developer**
+
+Consider supporting the original developer of the Lookalike plugin, Jamie Weston, through Buy Me A Coffee ([Link to Buy Me A Coffee](https://www.buymeacoffee.com/jamieweston)).
